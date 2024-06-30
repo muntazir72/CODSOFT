@@ -1,0 +1,62 @@
+import tkinter as tk
+from tkinter import messagebox
+
+######## FUNCTION DEFINITIONS
+def task_add():
+    task = entry.get()
+    if task == "" :
+        messagebox.showerror("Task Error","Please Enter the Task")
+    else  :
+        Tasks.insert(tk.END,f"-> {task}")
+        entry.delete(0,tk.END)
+        
+def task_delete():
+    select = Tasks.curselection()
+    if select:
+        Tasks.delete(select)
+    else :
+        messagebox.showerror("Task Error","Please Select a Task to delete")
+       
+def clear():
+    Tasks.delete(0,tk.END)
+
+def Quit():
+    root.destroy()
+
+#####INTERFACE
+
+root = tk.Tk()
+root.title("To-Do List")
+root.geometry("390x370")
+root.configure(bg="#9AC0CD")
+root.resizable(0,0)
+
+title_lb =tk.Label(root,text = "To-Do List",font=("Curlz MT",23),fg="#F0F8FF",bg="#9AC0CD")
+title_lb.pack(padx=10,pady=1)
+
+entry = tk.Entry(root,font=(14))
+entry.place(x=20,y=50,width=250,height=25)
+
+#### CREATING BUTTONS
+
+add_bt =tk.Button(root,text="Add Task",font=(12),bg="#66CD00",fg="black",command=task_add)
+add_bt.place(x=280,y=51,width=80,height=25)
+
+delete_bt=tk.Button(root,text="Delete Task",font=(12),bg="#EE7621",fg="black",command=task_delete)
+delete_bt.place(x=280,y=128,width=90,height=25)
+
+clear_bt =tk.Button(root,text="Clear All",font=(12),bg="#EE2C2C",fg="black",command=clear)
+clear_bt.place(x=280,y=178,width=90,height=25)
+
+quit_bt =tk.Button(root,text="Quit",font=(12),bg="#EE1289",fg="black",command=Quit)
+quit_bt.place(x=280,y=228,width=90,height=25)
+
+
+##### LIST BOX
+
+Tasks = tk.Listbox(root,font=(12),bg="white",fg="black")
+Tasks.place(x=20,y=100,width =250,height=200)
+
+root.mainloop()
+
+                

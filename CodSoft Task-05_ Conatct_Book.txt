@@ -1,0 +1,107 @@
+from tkinter import *
+from tkinter import messagebox
+
+root =Tk()
+root.geometry("650x500")
+root.title("Contact Book")
+root.config(bg='#1C86EE')
+
+contacts = []
+
+def add_contact():
+    name = name_entry.get()
+    phone = phone_entry.get()
+    email = email_entry.get()
+    address = address_entry.get()
+    if name!="" :
+        contacts.append((name,phone,email,address))
+        messagebox.showinfo("ContactList","Contact Added Successfully!")
+    else :
+        messagebox.showerror("Erro Occured","Please Enter the details!")
+    name_entry.delete(0,END)
+    phone_entry.delete(0,END)
+    email_entry.delete(0,END)
+    address_entry.delete(0,END)
+    update_listbox()
+
+def remove_contact():
+    selected = contacts_listbox.curselection()
+    if selected :
+        index = selected[0]
+        del contacts[index]
+        update_listbox()
+        messagebox.showinfo("ContactList","Contact Deleted Successfully!")
+    else :
+        messagebox.showerror("Error Occured","Please Select a Contact to Delete!")
+        
+
+def display_contacts():
+    selected = contacts_listbox.curselection()
+    if selected:
+        for contact in contacts:
+            messagebox.showinfo("Details","Name  :  "+contact[0]+
+                                '\n'+ "Phone  :  "+contact[1]+
+                                '\n'+ "Email  :  "+contact[2]+
+                                '\n'+ "Address  :  "+contact[3])
+    else:
+        messagebox.showerror("Error Occured","Select the conatct to dispaly info!")
+
+def update_listbox():
+    contacts_listbox.delete(0,END)
+    for contact in contacts :
+        contacts_listbox.insert(END,contact[0])
+
+def reset_listbox():
+    contacts_listbox.delete(0,END)
+    
+    
+
+title_label = Label(root,text="Contact Book",font=("Forte",28),bg="#1C86EE",fg="#1A1A1A")
+title_label.place(x=215,y=3)
+
+name_label = Label(root,text="Name :",font=("Bahnschrift SemiBold",14),bg="#8B795E")
+name_label.place(x=5,y=80)
+
+phone_label = Label(root,text="Phone No :",font=("Bahnschrift SemiBold",14),bg="#8B795E")
+phone_label.place(x=5,y=130)
+
+email_label = Label(root,text="Email :",font=("Bahnschrift SemiBold",14),bg="#8B795E")
+email_label.place(x=5,y=180)
+
+address_label = Label(root,text="Address :",font=("Bahnschrift SemiBold",14),bg="#8B795E")
+address_label.place(x=5,y=230)
+
+
+name_entry = Entry(root,font=("Arial",12),width=19)
+name_entry.place(x=76,y=82)
+
+phone_entry = Entry(root,font=("Arial",12),width=15)
+phone_entry.place(x=108,y=132)
+
+email_entry = Entry(root,font=("Arial",12),width=19)
+email_entry.place(x=74,y=182)
+
+address_entry = Entry(root,font=("Arial",12),width=17)
+address_entry.place(x=97,y=232)
+
+
+add_button = Button(root,text="Add Contact",font=("Algerian",15),bg="#308014",command=add_contact)
+add_button.place(x=64,y=280)
+
+delete_button = Button(root,text="Delete Contact",font=("Algerian",15),bg="#CD3700",command=remove_contact)
+delete_button.place(x=55,y=337)
+
+Show_button = Button(root,text="Show Details",font=("Algerian",15),bg="#FF8000",command=display_contacts)
+Show_button.place(x=62,y=395)
+
+reset_button = Button(root,text="Clear All",font=("Algerian",15),bg="#EEC900",command=reset_listbox)
+reset_button.place(x=70,y=453)
+
+contacts_listbox = Listbox(root,font=(" Baskerville Old Face",14),width=30,height=15)
+contacts_listbox.place(x=280,y=110)
+
+listbox_label = Label(root,text="List of Contacts",bg="#7D9EC0",font=("Monotype Corsiva",20))
+listbox_label.place(x=430,y=85)
+
+root.mainloop()
+        

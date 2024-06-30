@@ -1,0 +1,94 @@
+from tkinter import *
+
+def clear():
+    result_label.config(text='')
+
+def Btn_action(digit):
+    current = result_label['text']
+    new = current+str(digit)
+    result_label.config(text=new)
+
+def get_operator(op):
+    global num1,operator
+    num1 = int(result_label['text'])
+    operator = op
+    result_label.config(text='')
+
+def calculate():
+    global num1,num2,operator
+    num2 = int(result_label['text'])
+
+    if operator == '+':
+        result_label.config(text=str(num1+num2))
+    elif operator == '-':
+        result_label.config(text=str(num1-num2))
+    elif operator == '*':
+        result_label.config(text=str(num1*num2))
+    elif operator == '%':
+        result_label.config(text=str(num1%num2))
+    else:
+        result_label.config(text=str(num1/num2))
+        
+    
+
+root = Tk()
+root.geometry("285x330")
+root.title("CALCULATOR")
+root.configure(bg='#282828')
+root.resizable(0,0)
+
+num1=num2=operator=None
+
+result_label = Label(root,text="",font=(4),bg='#282828',fg='#F4F4F4',justify='left')
+result_label.place(x=5,y=5,width=280,height=75)
+
+btn_0 = Button(root,text='0',font=('bold',15),bg='#545454',fg='#F4F4F4',command=lambda: Btn_action(0))
+btn_1 = Button(root,text='1',font=('bold',15),bg='#545454',fg='#F4F4F4',command= lambda: Btn_action(1))
+btn_2 = Button(root,text='2',font=('bold',15),bg='#545454',fg='#F4F4F4',command= lambda: Btn_action(2))
+btn_3 = Button(root,text='3',font=('bold',15),bg='#545454',fg='#F4F4F4',command= lambda: Btn_action(3))
+btn_4 = Button(root,text='4',font=('bold',15),bg='#545454',fg='#F4F4F4',command= lambda: Btn_action(4))
+btn_5 = Button(root,text='5',font=('bold',15),bg='#545454',fg='#F4F4F4',command= lambda: Btn_action(5))
+btn_6 = Button(root,text='6',font=('bold',15),bg='#545454',fg='#F4F4F4',command= lambda: Btn_action(6))
+btn_7 = Button(root,text='7',font=('bold',15),bg='#545454',fg='#F4F4F4',command= lambda: Btn_action(7))
+btn_8 = Button(root,text='8',font=('bold',15),bg='#545454',fg='#F4F4F4',command= lambda: Btn_action(8))
+btn_9 = Button(root,text='9',font=('bold',15),bg='#545454',fg='#F4F4F4',command= lambda: Btn_action(9))
+btn_dot = Button(root,text='.',font=('bold',15),bg='#545454',fg='#F4F4F4',command= lambda : Btn_action('.'))
+
+btn_plus = Button(root,text='+',font=('bold',15),bg='#9E9E9E',fg='#F4F4F4',command=lambda : get_operator('+'))
+btn_minus = Button(root,text='-',font=('bold',15),bg='#9E9E9E',fg='#F4F4F4',command= lambda : get_operator('-'))
+btn_multiply = Button(root,text='*',font=('bold',15),bg='#9E9E9E',fg='#F4F4F4',command= lambda : get_operator('*'))
+btn_divide = Button(root,text='/',font=('bold',15),bg='#9E9E9E',fg='#F4F4F4',command= lambda : get_operator('/'))
+btn_percent = Button(root,text='%',font=('bold',15),bg='#9E9E9E',fg='#F4F4F4',command= lambda : get_operator('%'))
+btn_equal = Button(root,text='=',font=('bold',15),bg='#FF8000',fg='#F4F4F4',command= calculate)
+btn_back = Button(root,text='<<',font=('bold',15),bg='#9E9E9E',fg='#F4F4F4',command= clear)
+btn_clear = Button(root,text='CE',font=('bold',15),bg='#9E9E9E',fg='#F4F4F4',command= clear)
+
+
+btn_clear.place(x=5,y=100,width=65)
+btn_back.place(x=75,y=100,width=65)
+btn_percent.place(x=145,y=100,width=65)
+btn_divide.place(x=215,y=100,width=65)
+
+btn_7.place(x=5,y=145,width=65)
+btn_8.place(x=75,y=145,width=65)
+btn_9.place(x=145,y=145,width=65)
+btn_multiply.place(x=215,y=145,width=65)
+
+btn_4.place(x=5,y=190,width=65)
+btn_5.place(x=75,y=190,width=65)
+btn_6.place(x=145,y=190,width=65)
+btn_minus.place(x=215,y=190,width=65)
+
+btn_1.place(x=5,y=235,width=65)
+btn_2.place(x=75,y=235,width=65)
+btn_3.place(x=145,y=235,width=65)
+btn_plus.place(x=215,y=235,width=65)
+
+btn_0.place(x=75,y=280,width=65)
+btn_dot.place(x=145,y=280,width=65)
+btn_equal.place(x=215,y=280,width=65)
+
+
+
+root.mainloop()
+
